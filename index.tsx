@@ -16,6 +16,29 @@ import {
 import { JOB_DOMAINS } from './JOB_DOMAINS.js';
 
 /**
+ * Stylized Text-based Logo Component
+ */
+const Logo = ({ theme, className = "", scale = 1 }: { theme: 'light' | 'dark', className?: string, scale?: number }) => {
+  const isDark = theme === 'dark';
+  return (
+    <div className={`flex items-center gap-2 select-none ${className}`} style={{ transform: `scale(${scale})`, transformOrigin: 'left center' }}>
+      <div className="flex items-center gap-2 sm:gap-3 group cursor-default">
+        {/* Typography */}
+        <div className="flex flex-col justify-center">
+          <div className={`text-base sm:text-xl font-extrabold leading-none tracking-tight flex items-center ${isDark ? 'text-white' : 'text-ntprimary'}`}>
+            <span>NetTech</span>
+            <span className={`ml-1 ${isDark ? 'text-blue-400' : 'text-blue-700'}`}>India</span>
+          </div>
+          <span className="text-[7px] sm:text-[9px] font-bold uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500 mt-1">
+            Get Placed
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/**
  * Custom Modal Component
  */
 const Modal = ({ isOpen, onClose, title, children }: {
@@ -67,9 +90,10 @@ const App = () => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
       if (saved) return saved as 'light' | 'dark';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      // Strict default to dark
+      return 'dark';
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
@@ -173,17 +197,13 @@ const App = () => {
   return (
     <div className="bg-ntbg dark:bg-slate-900 min-h-screen transition-colors duration-500 font-sans flex flex-col">
 
-      {/* Navigation Bar - Responsive optimizations */}
+      {/* Navigation Bar */}
       <nav className="sticky top-0 z-40 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-white/10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex-shrink-0">
-            <img
-              src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img\NetTech India logo.png'}
-              alt="NetTech India"
-              className="h-8 sm:h-10 md:h-12 w-auto object-contain transition-all duration-500"
-            />
+            <Logo theme={theme} />
           </div>
-
+          
           <div className="hidden md:flex flex-grow justify-center px-4">
             <h1 className="text-center font-extrabold text-gray-900 dark:text-white leading-tight animate-fade-in-up md:text-xl lg:text-2xl">
               Bridging the Gap Between <span className="text-blue-700 dark:text-blue-400">Education</span> and <span className="text-blue-700 dark:text-blue-400">Employment</span>
@@ -194,8 +214,8 @@ const App = () => {
             <button
               onClick={toggleTheme}
               className={`p-2 sm:p-3 rounded-full transition-all duration-300 ${theme === 'light'
-                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                : 'bg-white/10 text-white hover:bg-white/20'
+                  ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  : 'bg-white/10 text-white hover:bg-white/20'
                 }`}
               title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
             >
@@ -210,7 +230,7 @@ const App = () => {
       </nav>
 
       <main className="flex-grow">
-        {/* Updated Hero Header Section - Mobile Optimized */}
+        {/* Hero Header Section */}
         <section className="bg-ntprimary dark:bg-slate-950 text-white py-12 sm:py-20 px-4 transition-colors duration-500">
           <div className="max-w-7xl mx-auto text-center reveal">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 tracking-tight leading-tight">
@@ -234,7 +254,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* Main Grid with Updated Card Design - Mobile Optimized Padding */}
+        {/* Domain Cards Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredDomains.map((domain, index) => (
@@ -405,7 +425,7 @@ const App = () => {
 
           <div className="mt-8 pt-4 sm:pt-6 pb-2 text-center">
             <a
-              href="https://forms.gle/MjASL15RThoH6QdZ8"
+              href="https://forms.gle/Qn5vCbw1FsaLizeeA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block w-full sm:w-auto bg-ntprimary text-white font-bold py-3 sm:py-4 px-8 sm:px-12 rounded-xl sm:rounded-2xl hover:opacity-90 transition-all shadow-xl hover:scale-105 active:scale-95 duration-300 text-sm sm:text-base"
@@ -417,18 +437,14 @@ const App = () => {
         </div>
       </Modal>
 
-      {/* Footer - Mobile Optimized */}
+      {/* Footer */}
       <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 py-10 sm:py-16 bg-white dark:bg-slate-950 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
-          <img
-            src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img/NetTech India logo.png'}
-            alt="NetTech India"
-            className="h-10 sm:h-16 w-auto mb-6 sm:mb-8 object-contain reveal"
-          />
+          <Logo theme={theme} scale={1.2} className="mb-6 sm:mb-8" />
           <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-slate-400 dark:text-slate-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] reveal text-center" style={{ transitionDelay: '0.1s' }}>
-            <h6 className="hover:text-ntprimary transition-colors">Guidance</h6>
-            <h6 className="hover:text-ntprimary transition-colors">Career Path</h6>
-            <a href="https://forms.gle/MjASL15RThoH6QdZ8" className="hover:text-ntprimary transition-colors">Get Placed</a>
+            <a href="#" className="hover:text-ntprimary transition-colors">Counseling</a>
+            <a href="#" className="hover:text-ntprimary transition-colors">Career Path</a>
+            <a href="#" className="hover:text-ntprimary transition-colors">Get Placed</a>
           </div>
           <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-100 dark:border-slate-900 w-full text-center text-slate-400 dark:text-slate-600 text-[10px] sm:text-xs reveal" style={{ transitionDelay: '0.2s' }}>
             © 2024 NetTech India Career Portal. All Rights Reserved.
