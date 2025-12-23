@@ -421,7 +421,7 @@ const App = () => {
       <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 py-10 sm:py-16 bg-white dark:bg-slate-950 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
           <img
-            src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img\NetTech India logo.png'}
+            src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img/NetTech India logo.png'}
             alt="NetTech India"
             className="h-10 sm:h-16 w-auto mb-6 sm:mb-8 object-contain reveal"
           />
