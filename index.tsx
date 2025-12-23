@@ -23,14 +23,6 @@ const Logo = ({ theme, className = "", scale = 1 }: { theme: 'light' | 'dark', c
   return (
     <div className={`flex items-center gap-2 select-none ${className}`} style={{ transform: `scale(${scale})`, transformOrigin: 'left center' }}>
       <div className="flex items-center gap-2 sm:gap-3 group cursor-default">
-        {/* Stylized Icon Block 
-        <div className="relative flex flex-col items-center justify-center bg-ntprimary dark:bg-blue-600 text-white w-9 h-9 sm:w-11 sm:h-11 rounded-lg font-black transition-transform duration-300 group-hover:scale-105 shadow-lg shadow-blue-900/10">
-          <div className="">
-          <span className="text-base sm:text-xl leading-none -mb-0.5 sm:-mb-1">N</span>
-          <span className="absolute right-2.5 top-0 text-base sm:text-xl leading-none -mb-0.5 sm:-mb-1">T</span>
-          </div>
-          <span className="text-[7px] sm:text-[9px] absolute right-2.5 top-4 sm:bottom-1 font-bold uppercase tracking-tighter">i</span>
-        </div> */}
         {/* Typography */}
         <div className="flex flex-col justify-center">
           <div className={`text-base sm:text-xl font-extrabold leading-none tracking-tight flex items-center ${isDark ? 'text-white' : 'text-ntprimary'}`}>
@@ -98,9 +90,9 @@ const App = () => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
       if (saved) return saved as 'light' | 'dark';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return 'dark';
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
@@ -204,7 +196,7 @@ const App = () => {
   return (
     <div className="bg-ntbg dark:bg-slate-900 min-h-screen transition-colors duration-500 font-sans flex flex-col">
 
-      {/* Navigation Bar - Using Text Logo */}
+      {/* Navigation Bar */}
       <nav className="sticky top-0 z-40 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-white/10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex-shrink-0">
@@ -237,17 +229,16 @@ const App = () => {
       </nav>
 
       <main className="flex-grow">
-        {/* Updated Hero Header Section - Mobile Optimized */}
-        <section className="bg-ntprimary dark:bg-slate-950 text-white py-12 sm:py-20 px-4 transition-colors duration-500">
+        {/* Hero Header Section */}
+        <section className="bg-ntprimary dark:bg-slate-950 text-white py-12 sm:py-20 px-4 transition-colors duration-500 shadow-inner">
           <div className="max-w-7xl mx-auto text-center reveal">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 tracking-tight leading-tight">
               Discover Your Career Path With NetTech India
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2">
+            <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
               Explore diverse job domains, find roles that match your skills, and plan your future with NetTech India.
             </p>
-            
-            <div className="max-w-2xl mx-auto relative group px-2">
+            <div className="max-w-2xl mx-auto relative group px-2 mb-8">
               <div className="absolute inset-y-0 left-4 sm:left-6 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 sm:h-6 sm:w-6 text-slate-400" />
               </div>
@@ -259,12 +250,12 @@ const App = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="mt-8 pt-4 sm:pt-6 pb-2 text-center">
+            <div>
               <a
                 href="https://forms.gle/Qn5vCbw1FsaLizeeA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full sm:w-auto bg-ntprimary text-white font-bold py-3 sm:py-4 px-8 sm:px-12 rounded-xl sm:rounded-2xl hover:opacity-90 transition-all shadow-xl hover:scale-105 active:scale-95 duration-300 text-sm sm:text-base"
+                className="inline-block w-full sm:w-auto bg-blue-600 dark:bg-blue-600 text-white font-bold py-3.5 sm:py-4 px-8 sm:px-12 rounded-full hover:bg-blue-700 transition-all shadow-xl hover:scale-105 active:scale-95 duration-300 text-sm sm:text-base border-2 border-white/20"
               >
                 Apply for Placement
               </a>
@@ -272,7 +263,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* Main Grid with Updated Card Design - Mobile Optimized Padding */}
+        {/* Domain Cards Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredDomains.map((domain, index) => (
@@ -454,25 +445,15 @@ const App = () => {
           </div>
         </div>
       </Modal>
-      <div className="m-1 mb-20 pt-4 sm:pt-6 pb-2 text-center">
-        <a
-          href="https://forms.gle/Qn5vCbw1FsaLizeeA"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block w-full sm:w-auto bg-ntprimary text-white font-bold py-3 sm:py-4 px-8 sm:px-12 rounded-xl sm:rounded-2xl hover:opacity-90 transition-all shadow-xl hover:scale-105 active:scale-95 duration-300 text-sm sm:text-base"
-        >
-          Apply for Placement
-        </a>
-      </div>
 
-      {/* Footer - Using Text Logo */}
+      {/* Footer */}
       <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 py-10 sm:py-16 bg-white dark:bg-slate-950 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
           <Logo theme={theme} scale={1.2} className="mb-6 sm:mb-8" />
           <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-slate-400 dark:text-slate-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] reveal text-center" style={{ transitionDelay: '0.1s' }}>
-            <a href="#" className="hover:text-ntprimary transition-colors">Counseling</a>
-            <a href="#" className="hover:text-ntprimary transition-colors">Career Path</a>
-            <a href="#" className="hover:text-ntprimary transition-colors">Get Placed</a>
+            <h6 className="hover:text-ntprimary transition-colors">Counseling</h6>
+            <h6 className="hover:text-ntprimary transition-colors">Career Path</h6>
+            <a href="https://forms.gle/Qn5vCbw1FsaLizeeA" className="hover:text-ntprimary transition-colors">Get Placed</a>
           </div>
           <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-100 dark:border-slate-900 w-full text-center text-slate-400 dark:text-slate-600 text-[10px] sm:text-xs reveal" style={{ transitionDelay: '0.2s' }}>
             © 2024 NetTech India Career Portal. All Rights Reserved.
