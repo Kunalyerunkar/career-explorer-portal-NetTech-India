@@ -178,7 +178,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex-shrink-0">
             <img
-              src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img/NetTech India logo.png'}
+              src={theme === 'dark' ? 'img/NetTech India logo W.png' : 'img\NetTech India logo.png'}
               alt="NetTech India"
               className="h-8 sm:h-10 md:h-12 w-auto object-contain transition-all duration-500"
             />
